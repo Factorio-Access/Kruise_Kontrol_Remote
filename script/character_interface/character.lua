@@ -193,7 +193,8 @@ end
 function Character:clear_remark()
   if not self.remark_id then return end
   self.remark_string = nil
-  return rendering.is_valid(self.remark_id) and rendering.destroy(self.remark_id)
+  if  self.remark_id.valid then  self.remark_id.destroy() end
+  self.remark_id = nil
 end
 
 function Character:remark(string, color)
