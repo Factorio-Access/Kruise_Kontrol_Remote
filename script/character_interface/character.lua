@@ -536,7 +536,7 @@ local get_localised_item_name = function(name)
   if localised_name then
     return localised_name
   end
-  localised_name = game.item_prototypes[name].localised_name
+  localised_name = prototypes.item[name].localised_name
   locale_cache[name] = localised_name
   return localised_name
 end
