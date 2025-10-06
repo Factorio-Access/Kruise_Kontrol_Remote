@@ -11,5 +11,11 @@
   },
   "Lua.workspace.userThirdParty": [
     "c:\\Users\\Austin\\AppData\\Roaming\\Code\\User\\workspaceStorage\\64f2d4a316e8e1c5d8b7a047fd285a10\\justarandomgeek.factoriomod-debug\\sumneko-3rd"
+  ],
+  "factorio.versions": [
+    {
+      "name": "System",
+      "factorioPath": "C:\\Program Files\\Factorio\\bin\\x64\\factorio.exe"
+    }
   ]
 }
