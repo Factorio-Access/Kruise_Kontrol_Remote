@@ -40,10 +40,10 @@ end
 
 function Build_ghost:clear_obstacles()
   local box = self.target.bounding_box
-  local entities = self.target.surface.find_entities_filtered{area = box, collision_mask = self.target.ghost_prototype.collision_mask}
+  local entities = self.target.surface.find_entities_filtered{area = box, collision_mask = self.target.ghost_prototype.collision_mask.layers }
   if next(entities) == nil then
     local box2 = {left_top = {x = box.left_top.x - 1, y = box.left_top.y - 1}, right_bottom = {x = box.right_bottom.x + 1, y = box.right_bottom.y + 1}}
-    entities = self.target.surface.find_entities_filtered{area = box2, collision_mask = self.target.ghost_prototype.collision_mask, to_be_deconstructed = true}
+    entities = self.target.surface.find_entities_filtered{area = box2, collision_mask = self.target.ghost_prototype.collision_mask.layers, to_be_deconstructed = true}
   end
 
   for k, entity in pairs (entities) do
