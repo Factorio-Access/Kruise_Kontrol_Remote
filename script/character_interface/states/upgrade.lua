@@ -40,7 +40,7 @@ function Upgrade:upgrade_target()
     name = self.target.get_upgrade_target().name,
     position = self.target.position,
     force = self.target.force,
-    direction = self.target.get_upgrade_direction(),
+    direction = self.target.direction,
     player = self.character.entity.player,
     fast_replace = true,
     raise_built = true
