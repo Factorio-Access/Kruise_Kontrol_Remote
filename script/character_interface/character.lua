@@ -576,13 +576,6 @@ function Character:give_item(name, count, target)
   local given = target.insert{name = name, count = count}
   self:remove_item(name, given)
 
-  target.surface.create_entity
-  {
-    name = "flying-text",
-    text = {"", "+", given, " ", get_localised_item_name(name), " (", self.entity.get_main_inventory().get_item_count(name), ")"},
-    position = {target.position.x, target.position.y - 1}
-  }
-
   if self.entity.player then
     self.entity.player.play_sound{path = "utility/inventory_move"}
   end
