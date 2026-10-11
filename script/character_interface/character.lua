@@ -483,7 +483,16 @@ end
 function Character:can_craft_recipe(recipe)
   if not recipe.enabled then return end
 
-  if not self.entity.prototype.crafting_categories[recipe.category] then return end
+  -- recipe.category was removed in 2.1; recipes now carry a categories array.
+  local crafting_categories = self.entity.prototype.crafting_categories
+  local category_ok = false
+  for _, category in pairs (recipe.categories) do
+    if crafting_categories[category] then
+      category_ok = true
+      break
+    end
+  end
+  if not category_ok then return end
 
   for k, ingredient in pairs (recipe.ingredients) do
     if ingredient.type == "fluid" then return end
