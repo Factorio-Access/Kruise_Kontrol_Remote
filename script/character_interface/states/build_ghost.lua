@@ -38,9 +38,20 @@ function Build_ghost:succeed()
   self.character:wait(5)
 end
 
+-- Bounding boxes overlap where collision boxes do not (curved rails at a corner), so a built neighbour shows up in
+-- the search. Only what the ghost's placement marked, or what moves or drops, is an obstacle.
+function Build_ghost:is_obstacle(entity)
+  return entity ~= self.target and (entity.type == "cliff" or entity == self.character.entity or entity.type == "item-entity" or entity.to_be_deconstructed())
+end
+
 function Build_ghost:clear_obstacles()
   local box = self.target.bounding_box
-  local entities = self.target.surface.find_entities_filtered{area = box, collision_mask = self.target.ghost_prototype.collision_mask.layers }
+  local entities = {}
+  for k, entity in pairs (self.target.surface.find_entities_filtered{area = box, collision_mask = self.target.ghost_prototype.collision_mask.layers }) do
+    if self:is_obstacle(entity) then
+      table.insert(entities, entity)
+    end
+  end
   if next(entities) == nil then
     local box2 = {left_top = {x = box.left_top.x - 1, y = box.left_top.y - 1}, right_bottom = {x = box.right_bottom.x + 1, y = box.right_bottom.y + 1}}
     entities = self.target.surface.find_entities_filtered{area = box2, collision_mask = self.target.ghost_prototype.collision_mask.layers, to_be_deconstructed = true}
